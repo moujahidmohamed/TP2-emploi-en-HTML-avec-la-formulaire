@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'Information Professeur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #2c3e50;
+        }
+        
+        .form-header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        .selected-professor {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6a11cb;
+        }
+        
+        .selected-professor p {
+            margin: 0;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .selected-professor span {
+            font-weight: 600;
+            color: #4bbea9;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+        }
+        
+        .btn-reset {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-reset:hover {
+            background-color: #d0d0d0;
+        }
+        
+        .success-message {
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Retour à l'emploi du temps</a>
+        
+        <div class="form-header">
+            <h1>Formulaire d'Information Professeur</h1>
+            <p>Veuillez remplir tous les champs obligatoires</p>
+        </div>
+        
+        <div class="selected-professor">
+            <p>Vous contactez : <span id="professorNameDisplay">Professeur</span></p>
+        </div>
+        
+        <form id="professorForm">
+            <div class="form-group">
+                <label for="lastName" class="required">Nom</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Votre nom" required>
+                <div class="error-message" id="lastNameError">Veuillez entrer votre nom</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="firstName" class="required">Prénom</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Votre prénom" required>
+                <div class="error-message" id="firstNameError">Veuillez entrer votre prénom</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="required">Email</label>
+                <input type="email" id="email" name="email" placeholder="exemple@email.com" required>
+                <div class="error-message" id="emailError">Veuillez entrer une adresse email valide</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="filiere" class="required">Filiere</label>
+                <select id="filiere" name="filiere" required>
+                    <option value="" disabled selected>Sélectionnez votre filiere</option>
+                    <option value="CS">CS</option>
+                    <option value="CFF">CFF</option>
+                    <option value="IAIL">IAIL</option>
+                    <option value="GEER">GEER</option>
+                    <option value="autre">Autre</option>
+                </select>
+                <div class="error-message" id="filiereError">Veuillez sélectionner votre filière</div>
+            </div> 
+
+            <div class="form-group">
+                <label for="question" class="required">Question</label>
+                <textarea id="question" name="question" placeholder="Votre question" required></textarea>
+                <div class="error-message" id="questionError">Veuillez entrer votre question</div>
+            </div>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn-submit">ENVOYER</button>
+                <button type="reset" class="btn-reset">ANNULLER</button>
+            </div>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            Votre formulaire a été soumis avec succès!
+        </div>
+    </div>
+
+    <script>
+        // Afficher le nom du professeur sélectionné
+        document.addEventListener('DOMContentLoaded', function() {
+            const professorName = localStorage.getItem('selectedProfessor');
+            if (professorName) {
+                document.getElementById('professorNameDisplay').textContent = 'Pr. ' + professorName;
+            }
+            
+            // Gestion de la soumission du formulaire
+            document.getElementById('professorForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validation simple
+                let isValid = true;
+                
+                // Validation des champs obligatoires
+                const requiredFields = ['profNumber', 'lastName', 'firstName', 'email', 'filiere', 'question'];
+                requiredFields.forEach(field => {
+                    const element = document.getElementById(field);
+                    const errorElement = document.getElementById(field + 'Error');
+                    
+                    if (!element.value.trim()) {
+                        errorElement.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                });
+                
+                // Validation spécifique pour l'email
+                const email = document.getElementById('email').value;
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!emailRegex.test(email)) {
+                    emailError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Afficher le message de succès
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Réinitialiser le formulaire après 3 secondes
+                    setTimeout(function() {
+                        document.getElementById('professorForm').reset();
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

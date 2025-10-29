@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emploi du temps CIS - S3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Logo */
+        .logo-container {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        /* Ligne horizontale */
+        .header-line {
+            border: 2px solid #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* AU : 2025–2026 */
+        .year-right {
+            text-align: right;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* Informations du planning */
+        .schedule-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Table du planning */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .schedule-table th {
+            background-color: #1c71b6;
+            color: white;
+            font-weight: 600;
+        }
+
+        .schedule-table td {
+            background-color: #f9f9f9;
+            height: 80px;
+            vertical-align: top;
+        }
+
+        .day-header {
+            background-color: #8ab2d5 !important;
+            color: white;
+            font-weight: bold;
+            width: 10%;
+        }
+
+        .course {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .course-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .course-details {
+            font-size: 12px;
+            color: #555;
+        }
+
+        .professor-link {
+            color: #1c71b6;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .professor-link:hover {
+            color: #155a8a;
+            text-decoration: underline;
+        }
+
+        .course-1, .course-2, .course-3, .course-4, .course-5, .course-6 {
+            background-color: white;
+            color: black;
+        }
+
+        /* Planning coloré */
+        .color-planning {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .planning-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .planning-slot {
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .schedule-table {
+                font-size: 12px;
+            }
+            
+            .schedule-table th, .schedule-table td {
+                padding: 8px 4px;
+            }
+            
+            .course {
+                font-size: 11px;
+            }
+
+            .logo {
+                max-width: 150px;
+            }
+
+            .year-right {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo en haut à droite -->
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Logo FPO" class="logo">
+        </div>
+
+        <!-- Ligne horizontale -->
+        <hr class="header-line">
+
+        <!-- AU : 2025–2026 sous la ligne, aligné à droite -->
+        <div class="year-right">AU : 2025–2026</div>
+
+        <!-- Informations du planning -->
+        <div class="schedule-info">
+            <div><strong>CS – S3</strong></div>
+        </div>
+
+        <!-- Table du planning -->
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th rowspan="2"></th>
+                    <th>9h00-10h30</th>
+                    <th>10h35-12h05</th>
+                    <th>12h15-13h45</th>
+                    <th>13h30-15h20</th>
+                    <th>15h30-17h00</th>
+                    <th>17h05-18h35</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="day-header">Lundi</td>
+                    <td>
+                        <div class="course course-1">
+                            <div class="course-name">Sécurité Système</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('R. Dakir')">Pr. R. Dakir</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-1">
+                            <div class="course-name">Sécurité Système</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('R. Dakir')">Pr. R. Dakir</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div class="course course-1">
+                            <div class="course-name">Systèmes et Réseaux III</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('R. Dakir')">Pr. R. Dakir</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-1">
+                            <div class="course-name">Systèmes et Réseaux III</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('R. Dakir')">Pr. R. Dakir</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="day-header">Mardi</td>
+                    <td>
+                        <div class="course course-2">
+                            <div class="course-name">LE – Français</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('D. Ahqijl')">Pr. D. Ahqijl</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-3">
+                            <div class="course-name">Développement logiciel</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('Y. Chawki')">Pr. Y. Chawki</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-3">
+                            <div class="course-name">Développement logiciel</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('Y. Chawki')">Pr. Y. Chawki</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="day-header">Mercredi</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="day-header">Jeudi</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="course course-4">
+                            <div class="course-name">POO</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('El. Ouahhabi')">Pr. El. Ouahhabi</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-4">
+                            <div class="course-name">POO</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('El. Ouahhabi')">Pr. El. Ouahhabi</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="day-header">Vendredi</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="course course-5">
+                            <div class="course-name">Management III</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('Hangour')">Pr. Hangour</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-6">
+                            <div class="course-name">Management III</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('Hangouri')">Pr. Hangouri</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="day-header">Samedi</td>
+                    <td>
+                        <div class="course course-5">
+                            <div class="course-name">Technologie web</div> 
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('O. Kamal')">Pr. O. Kamal</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course course-6">
+                            <div class="course-name">Technologie web</div>
+                            <div class="course-details">Salle 1</div>
+                            <div class="course-details">
+                                <a href="mja.html" class="professor-link" onclick="redirectToProfessorForm('O. Kamal')">Pr. O. Kamal</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr> 
+            </tbody>
+        </table>
+
+        <!-- Planning coloré -->
+        <div class="color-planning">
+            <div class="planning-grid">
+                <div class="planning-slot" style="background:red;">Horaire de vendredi</div>
+                <div class="planning-slot" style="background:#f797d0;">8h30 - 10h00</div>
+                <div class="planning-slot" style="background:#f797d0;">10h00 - 11h30</div>
+                <div class="planning-slot" style="background:#18950c;">11h30 - 13h00</div>
+                <div class="planning-slot" style="background:#6e9370;">15h15 - 16h45</div>
+                <div class="planning-slot" style="background:#6e9370;">16h50 - 18h20</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour rediriger vers le formulaire avec le nom du professeur
+        function redirectToProfessorForm(professorName) {
+            // Stocker le nom du professeur dans le localStorage
+            localStorage.setItem('selectedProfessor', professorName);
+            // La redirection se fait automatiquement via le lien href
+        }
+    </script>
+</body>
+</html>
